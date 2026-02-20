@@ -1,41 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zentido</title>
+    <title>Zentido - Transportadora Turística</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Diseño responsivo para móviles */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+        }
+
+        /* Mitad izquierda */
+        .left {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        /* Mitad derecha */
+        .right {
+            flex: 1;
+            background-color: #d8f3dc; /* verde pastel */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        h1 { color: #333; text-align: center; }
+        h2 { color: #444; }
+
+        img {
+            max-width: 90%;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        form, #mensaje-exito {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        label { font-weight: bold; display: block; margin-top: 10px; }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+        }
+
+        button {
+            background-color: #1b4332;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: #2d6a4f; }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        /* Estilo del mensaje de éxito */
+        #mensaje-exito {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+    </style>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 20px;
-    }
-    h1 {
-        color: #333;
-    }
-    img {
-        max-width: 100%;
-        height: auto;
-        margin-top: 20px;
-    }
-</style>
 <body>
-    <h1>TRANSPORTADORA TURISTICA ZENTIDO</h1>
-    <img src="agencia-de-viajes-1024x594.jpg" alt="Imagen de agencia de viajes">
-    <section id="contacto">
-    <h2>Reserva tu viaje</h2>
-    <form>
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre"><br><br>
-        
-        <label for="destino">¿A dónde viajas?:</label><br>
-        <input type="text" id="destino" name="destino"><br><br>
-        
-        <button >Enviar Solicitud</button>
-    </form>
-</section>
+
+    <section class="left">
+        <header>
+            <h1>TRANSPORTADORA TURÍSTICA ZENTIDO</h1>
+        </header>
+        <img src="agencia-de-viajes-1024x594.jpg" alt="Agencia de Viajes">
+        <footer>
+            <p>© 2026 Zentido. Todos los derechos reservados.</p>
+        </footer>
+    </section>
+
+    <section class="right">
+        <main id="contenedor-formulario">
+            <h2>Reserva tu viaje</h2>
+            
+            <form id="formulario-reserva">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+
+                <label for="destino">Destino deseado:</label>
+                <input type="text" id="destino" name="destino" placeholder="Ej. Oaxaca o Cancún" required>
+
+                <label for="comentarios">Detalles del viaje:</label>
+                <textarea id="comentarios" name="comentarios" rows="4" placeholder="¿Cuántas personas viajan? ¿En qué fecha?"></textarea>
+
+                <button type="submit" id="btn-enviar">Enviar Solicitud</button>
+            </form>
+
+            <div id="mensaje-exito">
+                <h2 style="color: #2d6a4f;">¡Solicitud Recibida! 🚐</h2>
+                <p>Gracias por contactar a <strong>Zentido</strong>. Hemos registrado tu información en nuestro sistema y un asesor te escribirá pronto.</p>
+                <button onclick="location.reload()" style="background: #444;">Hacer otra reserva</button>
+            </div>
+        </main>
+    </section>
+
+    <script>
+        const formulario = document.getElementById('formulario-reserva');
+        const mensajeExito = document.getElementById('mensaje-exito');
+        const btnEnviar = document.getElementById('btn-enviar');
+
+        formulario.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que la página se recargue
+
+            btnEnviar.innerText = "Enviando...";
+            btnEnviar.disabled = true;
+
+            // Enviando los datos a Sheet.best
+            fetch('https://api.sheetbest.com/sheets/a406bdb9-b219-471e-8933-c701c193579e', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "nombre": formulario.nombre.value,
+                    "email": formulario.email.value,
+                    "destino": formulario.destino.value,
+                    "comentarios": formulario.comentarios.value
+                })
+            })
+            .then(response => {
+                if(response.ok) {
+                    formulario.style.display = 'none'; // Oculta el formulario
+                    mensajeExito.style.display = 'block'; // Muestra el mensaje de gracias
+                }
+            })
+            .catch(error => {
+                alert("Hubo un error al enviar. Intenta de nuevo.");
+                btnEnviar.innerText = "Enviar Solicitud";
+                btnEnviar.disabled = false;
+            });
+        });
+    </script>
+
 </body>
 </html>
