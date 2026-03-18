@@ -1,0 +1,160 @@
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+
+/* MENU */
+.menu{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:#f2f2f2;
+
+padding:15px 40px;
+
+position:fixed;
+top:0;
+width:100%;
+}
+
+
+.logo{
+font-weight:bold;
+}
+
+
+.links{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+
+.links a{
+text-decoration:none;
+color:#333;
+}
+
+
+.links a:hover{
+color:red;
+}
+
+
+/* espacio por menu fijo */
+body{
+padding-top:70px;
+}
+
+
+/* INICIO */
+.inicio{
+text-align:center;
+padding:50px;
+}
+
+
+.inicio img{
+width:80%;
+margin-top:20px;
+}
+
+
+/* FAVORITOS */
+.favoritos{
+text-align:center;
+padding:40px;
+background:#fafafa;
+}
+
+
+.contenedor{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+
+/* TARJETAS */
+.tarjeta{
+width:250px;
+border:1px solid #ddd;
+padding:15px;
+}
+
+
+.tarjeta img{
+width:100%;
+}
+
+
+.tarjeta button{
+margin-top:10px;
+padding:8px;
+background:#3498db;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+
+.tarjeta button:hover{
+background:#2980b9;
+}
+
+
+/* MENU COMIDA */
+.menu-comida{
+text-align:center;
+padding:40px;
+}
+
+
+.boton{
+background:#e67e22;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+}
+
+
+.boton:hover{
+background:#d35400;
+}
+
+
+/* NOSOTROS */
+.nosotros{
+text-align:center;
+padding:40px;
+background:#f4f4f4;
+}
+
+
+/* UBICACION */
+.ubicacion{
+text-align:center;
+padding:40px;
+}
+
+
+.ubicacion img{
+width:70%;
+margin-top:20px;
+}
+
+
+/* FOOTER */
+.footer{
+text-align:center;
+padding:20px;
+background:#f2f2f2;
+}
